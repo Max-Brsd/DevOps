@@ -1,0 +1,44 @@
+name: publish_image
+
+on:
+  push:
+    branches: master
+  workflow_run:
+    workflows: [test_backend]
+    types:
+      - completed
+
+jobs:
+  build-and-push-docker-image:
+   # run only when code is compiling and tests are passing
+   runs-on: ubuntu-22.04
+   if: github.ref == 'refs/heads/master'
+   # steps to perform in job
+   steps:
+     - name: Login to DockerHub
+       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+       
+     - name: Checkout code
+       uses: actions/checkout@v2.5.0
+
+     - name: Build image and push backend
+       uses: docker/build-push-action@v3
+       with:
+         # relative path to the place where source code with Dockerfile is located
+         context: ./simple-api
+         tags:  ${{secrets.DOCKERHUB_USERNAME}}/devops-backend:latest
+         push: ${{ github.ref == 'refs/heads/master' }}
+
+     - name: Build image and push database
+       uses: docker/build-push-action@v3
+       with:
+         context: ./Postgres
+         tags: ${{secrets.DOCKERHUB_USERNAME}}/devops-database:latest
+         push: ${{ github.ref == 'refs/heads/master' }}
+
+     - name: Build image and push httpd
+       uses: docker/build-push-action@v3
+       with:
+         context: ./https-server
+         tags: ${{secrets.DOCKERHUB_USERNAME}}/devops-httpd:latest
+         push: ${{ github.ref == 'refs/heads/master' }}
