@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+    backend:
+        container_name: simpleapi
+        image: planche69/devops-backend:1.1
+        networks:
+          - app-network
+        depends_on:
+          - database
+        environment:
+          - DB_URL=jdbc:postgresql://database:5432/db
+          - DB_USR=usr
+          - DB_PWD=pwd
+
+    database:
+        container_name: database
+        image: planche69/devops-database:1.0
+        networks:
+          - app-network
+        volumes:
+          - /data:/var/lib/postgresql/data
+
+    httpd:
+        container_name: httpd
+        image: planche69/devops-httpd:1.0
+        ports:
+          - 8081:80
+        networks:
+          - app-network
+        depends_on:
+          - backend
+
+networks:
+    app-network: 
