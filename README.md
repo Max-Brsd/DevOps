@@ -124,3 +124,40 @@ networks:
 
 ```docker push planche69/devops-backend:1.1```
 Cette commande permet de push notre image avec le nom que l'on veut en ligne.
+
+
+## Question 2-1 : What are testcontainers ?
+
+Les conteneurs de tests sont les différents modules que va utiliser l'api backend. Ici jdbc et postgresql.
+
+## Question 2-2 : Document your Github Actions configurations :
+
+```yml
+name: CI devops 2023
+on:
+  #to begin you want to launch this job in main and develop
+  push:
+    branches: master # On va lancer une CI que lorsque l'on reçoit des changements sur la branche main
+  pull_request:
+
+jobs:
+  test-backend: 
+    runs-on: ubuntu-22.04
+    steps:
+     #checkout your github code using actions/checkout@v2.5.0
+      - uses: actions/checkout@v2.5.0
+
+     #do the same with another action (actions/setup-java@v3) that enable to setup jdk 17
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3 # On va utiliser la V3 de java pour avoir JDK 17
+        with:
+          java-version: '17' # On spécifie la version 17
+          distribution: 'adopt' 
+
+     #finally build your app with the latest command
+      - name: Build and test with Maven
+        run: | 
+              cd simple-api 
+              mvn clean test
+      # On se déplace dans le dossier ou le pom.xml est présent et on lance un clean et des tests.
+```
