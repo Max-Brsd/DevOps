@@ -6,11 +6,6 @@ on:
 jobs:
   test-backend: 
     runs-on: ubuntu-22.04
-    if: 
-      contains('
-        refs/heads/develop
-        refs/heads/master
-        ', github.ref)
     steps:
      #checkout your github code using actions/checkout@v2.5.0
       - uses: actions/checkout@v2.5.0
