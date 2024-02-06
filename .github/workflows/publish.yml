@@ -12,7 +12,6 @@ jobs:
   build-and-push-docker-image:
    # run only when code is compiling and tests are passing
    runs-on: ubuntu-22.04
-   if: github.ref == 'refs/heads/master'
    # steps to perform in job
    steps:
      - name: Login to DockerHub
