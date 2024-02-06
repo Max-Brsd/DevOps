@@ -9,7 +9,7 @@ on:
       - completed
 
 jobs:
-  build-and-push-docker-image:
+  on-sucess:
    # run only when code is compiling and tests are passing
    runs-on: ubuntu-22.04
    # steps to perform in job
@@ -41,3 +41,8 @@ jobs:
          context: ./https-server
          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops-httpd:latest
          push: ${{ github.ref == 'refs/heads/master' }}
+  on-failure:
+      runs-on: ubuntu-latest
+      if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+      steps:
+        - run: echo 'The triggering workflow failed'
