@@ -44,18 +44,18 @@ jobs:
          # relative path to the place where source code with Dockerfile is located
          context: ./simple-api
          tags:  ${{secrets.DOCKERHUB_USERNAME}}/devops-backend:latest
-         push: ${{ github.ref == 'refs/heads/main' }}
+         push: ${{ github.ref == 'refs/heads/master' }}
 
      - name: Build image and push database
        uses: docker/build-push-action@v3
        with:
          context: ./Postgres
          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops-database:latest
-         push: ${{ github.ref == 'refs/heads/main' }}
+         push: ${{ github.ref == 'refs/heads/master' }}
 
      - name: Build image and push httpd
        uses: docker/build-push-action@v3
        with:
          context: ./https-server
          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops-httpd:latest
-         push: ${{ github.ref == 'refs/heads/main' }}
+         push: ${{ github.ref == 'refs/heads/master' }}
