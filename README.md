@@ -161,3 +161,7 @@ jobs:
               mvn clean test
       # On se déplace dans le dossier ou le pom.xml est présent et on lance un clean et des tests.
 ```
+
+## Question 2-3 : Document your quality gate configuration :
+
+On a ajouté en secrets : **SONAR_TOKEN** qui est le token que l'on a ajouté directement via Sonar. Ensuite l'enrichissement se fait directement via les CIs.
