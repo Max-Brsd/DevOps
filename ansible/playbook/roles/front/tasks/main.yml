@@ -1,0 +1,6 @@
+- name: Run front
+  docker_container:
+    name: front
+    image: planche69/devops-front:3.0
+    ports:
+      - "80:80"
