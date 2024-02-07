@@ -1,2 +1,3 @@
----
-# vars file for database
+postgres_db: "{{POSTGRES_DB}}"
+postgres_user: "{{ POSTGRES_USER }}"
+postgres_password: "{{ POSTGRES_PASSWORD }}" 

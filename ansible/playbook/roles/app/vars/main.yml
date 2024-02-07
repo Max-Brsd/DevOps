@@ -1,2 +1,3 @@
----
-# vars file for app
+db_url: "{{ DB_URL }}"
+db_usr: "{{ DB_USR }}"
+db_pwd: "{{ DB_PWD }}"
