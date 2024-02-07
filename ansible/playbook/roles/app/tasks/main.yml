@@ -1,0 +1,10 @@
+- name: Run simpleapi
+  docker_container:
+    name: simpleapi
+    image: planche69/devops-backend:latest
+    env:
+      DB_URL: "{{ DB_URL }}"
+      DB_USR: "{{ DB_USR }}"
+      DB_PWD: "{{ DB_PWD }}"
+    networks:
+      - name: "app-network"
