@@ -3,8 +3,8 @@
     name: database
     image: planche69/devops-database:latest
     env:
-      POSTGRES_DB: "{{ postgres_db }}"
-      POSTGRES_USER: "{{ postgres_user }}"
-      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      POSTGRES_DB: "db"
+      POSTGRES_USER: "usr"
+      POSTGRES_PASSWORD: "pwd"
     networks:
       - name: "app-network"

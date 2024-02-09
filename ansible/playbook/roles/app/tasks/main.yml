@@ -3,8 +3,8 @@
     name: simpleapi
     image: planche69/devops-backend:latest
     env:
-      DB_URL: "{{ db_url }}"
-      DB_USR: "{{ db_usr }}"
-      DB_PWD: "{{ db_pwd }}"
+      DB_URL: "jdbc:postgresql://database:5432/db"
+      DB_USR: "usr"
+      DB_PWD: "pwd"
     networks:
       - name: "app-network"
